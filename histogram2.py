@@ -1,7 +1,31 @@
 
+from __future__ import print_function
+import random
 
-def histogram(choosen_text):
-  file = open(choosen_text, 'r')
+def punctuation(text):
+  punct = '''"\.?@#$%^&*_~='',!()-[]{}\;:<>"'''
+  for chars in text:
+    if chars in punct:
+      text = text.replace(chars, '')
+  return text
+
+def word_file(text_inputed):
+  file = open(text_inputed, 'r')
+  text = file.read()
+  file.close()
+  text = text.lower()
+  text = punctuation(text)
+  return text
+
+def word_split(text_inputed):
+  # print(f"word before getting split : {text_inputed}")
+  word_list = text_inputed.split()
+  # print(f"word AFTER getting split : {word_list}")
+  return word_list
+
+
+def histogram(chosen_text):
+  file = open(chosen_text, 'r')
   text = file.read()
   file.close()
   text = text.lower()
@@ -27,6 +51,18 @@ def histogram(choosen_text):
 
   return histogram
 
+def stochastic(chosen_text):
+  open_file = word_file(chosen_text)
+  word_count = word_split(open_file)
+  histogram_list = histogram(chosen_text)
+  dart_random_number = random.randint(1, len(word_count))
+  
+  index = 0
+  for key in histogram_list:
+    index += histogram_list[key]
+    if dart_random_number <= index:
+      return key
+
 def punctuation(text):
   punct = '''"\.?@#$%^&*_~='',!()-[]{\}\;:<>"'''
 
@@ -44,9 +80,13 @@ def frequency(histogram, word):
       return tuple[1]
 
 if __name__ == '__main__':
-  print_historgram = histogram("danger.txt")
+  
+  print_stochastic = stochastic("testsampletext.txt")
+  print(print_stochastic)
+
+  print_historgram = histogram("testsampletext.txt")
   print(print_historgram)
   length_historgram = unique_words(print_historgram)
   print(length_historgram)
-  word_historgram = frequency(print_historgram, 'space')
+  word_historgram = frequency(print_historgram, 'fish')
   print(word_historgram)

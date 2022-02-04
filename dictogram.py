@@ -3,6 +3,8 @@
 from __future__ import division, print_function  # Python 2 and 3 compatibility
 import random
 
+from histogram import histogram
+
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -21,15 +23,32 @@ class Dictogram(dict):
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        dictionary = self
+        dictionary_keys = self.keys() # the key being the word in the Dictionary 
+        distinct_word = self.types # counts the number of times a particular word shows up
+        total_word_count = self.tokens # Updates the total number of words in histogram after each itteration
+        if word not in dictionary_keys: 
+            dictionary.update({word: count})
+            distinct_word += count
+        else: 
+            dictionary[word] += count
+        total_word_count += count
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        dictionary = self
+        dictionary_keys = self.keys
+        if dictionary_keys[word] == None:
+            return 0
+        else: 
+            return dictionary[word]
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
         each word's probability of being chosen by its observed frequency."""
         # TODO: Randomly choose a word based on its frequency in this histogram
+        
 
 
 def print_histogram(word_list):
