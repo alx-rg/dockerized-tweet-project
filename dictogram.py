@@ -26,10 +26,11 @@ class Dictogram(dict):
         #self.types counts the number of times a particular word shows up
         #self.tokens Updates the total number of words in histogram after each itteration
         if word not in dictionary_keys: 
-            dictionary.update({word: count})
+            dictionary[word] = count
             self.types += 1
         else: 
             dictionary[word] += count
+
         self.tokens += count
 
     def frequency(self, word):
@@ -41,6 +42,7 @@ class Dictogram(dict):
             return 0
         else: 
             return dictionary[word]
+        #return self.get(word, 0)
 
     def sample(self):
         """Return a word from this histogram, randomly sampled by weighting
@@ -51,6 +53,13 @@ class Dictogram(dict):
             index += self[key]
             if dart_random_number <= index:
                 return key
+
+        #target = 0
+        #dart = random.uniform(0, self.tokens)
+        #for word, count in self.items():
+            #target += count
+            #if target >= dart:
+                #return word
         # TODO: Randomly choose a word based on its frequency in this histogram
         
 
