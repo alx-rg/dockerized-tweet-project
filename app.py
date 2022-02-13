@@ -17,7 +17,7 @@ def home():
     calling_histogram = before_first_request()
     random_word = calling_histogram
     """Route that returns a web page containing the generated text."""
-    return f"Random Word from fishes: {random_word}"
+    return (f"Random Word from fishes, not actually returning a random word: {random_word}")
 
 
 if __name__ == "__main__":
