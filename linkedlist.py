@@ -1,6 +1,9 @@
 #!python
 
 
+from platform import node
+
+
 class Node(object):
 
     def __init__(self, data):
@@ -49,17 +52,30 @@ class LinkedList:
     def is_empty(self):
         """Return a boolean indicating whether this linked list is empty."""
         return self.head is None
-
+        
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(n) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
+        node_count = 0
+        node = self.head
+        print(node)
+        while node is not self.tail:
+            node = node.next
+            node_count += 1
+        return node_count
 
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
+        new_node = item
+        if (self.is_empty() is True):
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.append(new_node)
         # TODO: If self.is_empty() == True set the head and the tail to the new node
         # TODO: Else append node after tail
 
@@ -67,13 +83,23 @@ class LinkedList:
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
+        if (self.is_empty() is False):
+            node = item
+            self.insert(node)
+
         # TODO: Create new node to hold given item
         # TODO: Prepend node before head, if it exists
+        
 
     def find(self, item):
         """Return an item from this linked list if it is present.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
+        for node in nodes
+            if (item == self.item):
+                return True
+            else:
+                return False
         # TODO: Loop through all nodes to find item, if present return True otherwise False
 
     def delete(self, item):

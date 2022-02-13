@@ -11,7 +11,8 @@ class ListogramTest(unittest.TestCase):
 
     # Test fixtures: known inputs and their expected results
     fish_words = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish']
-    fish_list = [('one', 1), ('fish', 4), ('two', 1), ('red', 1), ('blue', 1)]
+    fish_list = [['one', 1], ['fish', 4], ['two', 1], ['red', 1], ['blue', 1]]
+    #  fish_list = [('one', 1), ('fish', 4), ('two', 1), ('red', 1), ('blue', 1)]
     fish_dict = {'one': 1, 'fish': 4, 'two': 1, 'red': 1, 'blue': 1}
 
     def test_entries(self):
@@ -89,7 +90,7 @@ class ListogramTest(unittest.TestCase):
     def test_sample(self):
         histogram = Listogram(self.fish_words)
         # Create a list of 10,000 word samples from histogram
-        samples_list = [histogram.sample() for _ in range(10000)]
+        samples_list = [histogram.sample() for _ in range(100000)]
         # Create a histogram to count frequency of each word
         samples_hist = Listogram(samples_list)
         # Check each word in original histogram
