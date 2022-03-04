@@ -118,7 +118,14 @@ class LinkedList:
 
         # TODO: Loop through all nodes to find item, if present return True otherwise False
     
-    
+    def find_if_matches(self, matching_function):
+        """Return an item from this linked list if it is present."""
+        node = self.head
+        while node is not None:
+            if matching_function(node.data): 
+                return node.data
+            node = node.next
+        return None 
     
     def replace(self, current_item, new_item):
         """Replace an item in the linked list with a new item"""

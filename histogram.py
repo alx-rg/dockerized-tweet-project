@@ -21,7 +21,17 @@ def word_split(text_inputed):
   # print(f"word AFTER getting split : {word_list}")
   return word_list
 
-def histogram(text_inputed):
+def histogram(word_list):
+  histogram = {}
+
+  for word in word_list:
+      if word not in histogram:
+          histogram[word] = 1
+      else: 
+          histogram[word] += 1
+  return histogram
+
+def histogram_fileopen(text_inputed):
   # Open text file, read the file and enter into the 'file' variable  
   file = open(text_inputed, 'r')
   # Open text, input into the 'file' variable 
