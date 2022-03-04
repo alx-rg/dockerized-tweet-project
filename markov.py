@@ -1,6 +1,8 @@
 from dictogram import Dictogram
 from histogram import word_file, stochastic, histogram, histogram_fileopen
 from random import random, randint
+from tokens import get_token
+from tasks import get_open_and_lower
 
 # word_list = ['one', 'fish', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'dog', 'moose', 'doodle']
 
@@ -17,37 +19,7 @@ def markov_chain(word_list):
       new_dictionary[word].add_count(word_2)
   return new_dictionary
 
-# def word_frequency(hist):
-#     count = 0 
-#     dic = histogram(hist)
-#     for key in dic:
-#         count += dic[key]
-
-#     dart_random_number = random.randint(1, count)
-#     index = 0
-#     for key in dic:
-#       index += dic[key]
-#       if dart_random_number <= index:
-#         return key
-
-# def next_word(word_list, word):
-#   inner_dictionnary = word_list[word]
-#   random_word = word_frequency(inner_dictionnary)
-#   return random_word
-
-# def sentences(word_list):
-#     word_1 = list(word_list.keys())[0]
-#     word_2 = next_word(word_list, word_1)
-#     new_sentence = word_1 + ' ' + word_2 + ' '
-#     prev_word = word_2
-
-#     for word in range(0, random.randint(1, 101)):
-#         new_word = next_word(word_list, prev_word)
-#         prev_word = new_word
-#         new_sentence += new_word + ' '
-#     return new_sentence
-
-def create_sentence(markov):
+def create_sentence(markov, char_length):
     new_sentence = ''
     # convert list to iterator
     iterator_text = iter(markov)
@@ -55,8 +27,8 @@ def create_sentence(markov):
     first_word = next(iterator_text)
     #start the sentence / makov with the first word
     new_sentence += first_word
-    limit = 75
-    while len(new_sentence) < limit:
+    char_limit = char_length
+    while len(new_sentence) < char_limit:
         new_sentence_list = new_sentence.split()
         last_word = new_sentence_list[-1]
         last_word_histogram = markov[last_word]
@@ -67,7 +39,9 @@ def create_sentence(markov):
 if __name__ == "__main__":
     # test_words = histogram_fileopen('testsampletext.txt')
     # test_markov = markov_chain(test_words)
-    test_markov = markov_chain(['one', 'fish', 'moose', 'one', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'dog', 'moose', 'fish', 'moose', 'one', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'dog', 'moose', 'dog', 'moose', 'dog', 'moose'])
-    test_sentence = create_sentence(test_markov)
-
+    file_text = get_open_and_lower("words-sample.txt")
+    word_list = get_token(file_text)
+    # test_markov = markov_chain(['one', 'fish', 'moose', 'one', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'dog', 'moose', 'fish', 'moose', 'one', 'two', 'fish', 'red', 'fish', 'blue', 'fish', 'one', 'dog', 'moose', 'dog', 'moose', 'dog', 'moose'])
+    test_markov = markov_chain(word_list)
+    test_sentence = create_sentence(test_markov , 60)
     print(test_sentence)

@@ -1,20 +1,28 @@
 """Main script, uses other modules to generate sentences."""
 #git subtree push --prefix Code heroku master (from main folder/source)
-from flask import Flask, redirect, request, render_template, render_template_string
-from dictogram import Dictogram
-from twitter import tweet
+from flask import Flask, redirect, request, render_template
+import twitter
+from markov import markov_chain, create_sentence
+from tokens import get_token
+from tasks import get_open_and_lower
 
 app = Flask(__name__)
 
+open_text_file = get_open_and_lower('words-sample.txt')
+tokenized_text_file = get_token(open_text_file)
+markov = markov_chain(tokenized_text_file)
+
 @app.route("/")
 def index():
+    sentence = create_sentence(markov, 80)
     """Route that returns a web page containing the generated text."""
-    return render_template('index.html')
+    return render_template('index.html', sentence=sentence)
 
 @app.route('/tweet', methods=['POST'])
 def tweet():
     status = request.form['sentence']
-    print(status)
+    twitter.tweet(status)
+    # print(status)
     return redirect('/')
 
 if __name__ == "__main__":
