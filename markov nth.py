@@ -10,8 +10,6 @@ def markov_chain(word_list, n):
   if length_word_list < n:
     return {}
 
-  
-  
 
   for index in range(len(word_list) - 1):
     word = word_list[index]
@@ -24,35 +22,6 @@ def markov_chain(word_list, n):
       markov[word].add_count(word_2)
   return markov
 
-# def word_frequency(hist):
-#     count = 0 
-#     dic = histogram(hist)
-#     for key in dic:
-#         count += dic[key]
-
-#     dart_random_number = random.randint(1, count)
-#     index = 0
-#     for key in dic:
-#       index += dic[key]
-#       if dart_random_number <= index:
-#         return key
-
-# def next_word(word_list, word):
-#   inner_dictionnary = word_list[word]
-#   random_word = word_frequency(inner_dictionnary)
-#   return random_word
-
-# def sentences(word_list):
-#     word_1 = list(word_list.keys())[0]
-#     word_2 = next_word(word_list, word_1)
-#     new_sentence = word_1 + ' ' + word_2 + ' '
-#     prev_word = word_2
-
-#     for word in range(0, random.randint(1, 101)):
-#         new_word = next_word(word_list, prev_word)
-#         prev_word = new_word
-#         new_sentence += new_word + ' '
-#     return new_sentence
 
 def create_sentence(markov):
     new_sentence = ''

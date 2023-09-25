@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
 # Things to remember:
 # python3 -m venv env
-# source venv/bin/activate 
+# source venv/bin/activate
 # If you ever want to deactivate your virtual environment, just type deactivate in your terminal window.#
 # export FLASK_ENV=development; flask run
 # http://127.0.0.1:5000/
